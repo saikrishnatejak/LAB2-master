@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="scotchApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="script.js"></script>
+    <style>
+        .bground {
+            /* The image used */
+            background-image: url("./images/weather.jpg");
+            height: 600px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="weatherctrler" class="bground" align="center" >
+    <h1>Welcome to weather Page</h1>
+    <label>State:</label>
+    <input type="text" ng-model="StateName" placeholder="Enter a state here">
+    <label>City:</label>
+    <input type="text" ng-model="CityName" placeholder="Enter a City here">
+    <button id="btn" ng-click="getWeather()"> Display Weather </button>
+    <hr>
+    <div >
+
+        <p class="currentConditions" ng-bind-html-unsafe="currentweather.html"></p>
+    </div>
+    <h1>{{currentweather.html}}</h1>
+
+</div>
+</body>
+</html>

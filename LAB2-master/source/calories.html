@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  .bground {
+    /* The image used */
+    background-image: url("./images/food.jpeg");
+    height: 600px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+<head>
+  <title>calorie</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+
+
+<div ng-app="scotchApp" ng-controller="calorieCtrl" class="bground" align="center">
+  <input type="text"  ng-model="foodName" placeholder="Enter foodName " id="foodName">
+      <button id="btn" ng-click="calorieDetailsFn()">
+          calorie Details
+      </button>
+
+<h1>Calorie details are as follows</h1>
+  <table style="background:rosybrown">
+    <th width="30%">Description</th>
+    <th width="30%">Value</th>
+    <tr ng-repeat="obj in calorieDetails">
+      <td>{{ obj.name }}</td>
+      <td>{{ obj.value }}</td>
+    </tr>
+  </table>  
+</div>
+</body>
+</html>
+
+
+<script src="script.js">
+
+
+
+</script>

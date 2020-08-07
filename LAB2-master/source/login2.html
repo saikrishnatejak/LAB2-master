@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box}
+
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: darkblue;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    button:hover {
+        opacity:1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: cornflowerblue;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn, .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+
+</style>
+<body background="./images/1.jpg">
+
+<form action="/welcome.html" style="border:1px solid #ccc">
+    <div class="container" >
+        <table>
+            <tr>
+
+                <td><p>Enter your details to login</p></td>
+                <hr>
+            </tr>
+            <tr>
+                <td><label for="email"><b>Email</b></label></td>
+                <td> <input id="userName" type="text" placeholder="Enter Email" name="email" required style="width: fit-content;" align=""><br></td>
+            </tr>
+            <tr>
+                <td><label for="psw"><b>Password</b></label></td>
+                <td><input id="userPassword"  type="password" placeholder="Enter Password" name="psw" required style="width: fit-content;"> <br></td>
+            </tr>
+
+
+
+
+            <tr> <td><button type="button" class="cancelbtn" onclick="check()" >Login</button></td></tr>
+            <tr><td><div id="status"></div></td></tr>
+            <tr><td><input onClick="login()" type="submit" value="Login with Facebook"></td></tr>
+
+        </table>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script>
+    // check if stored data from register-form is equal to entered data in the   login-form
+    function check() {
+        // stored data from the register-form
+        var storedName = localStorage.getItem('userName');
+        var storedPassword = localStorage.getItem('userPassword');
+        // entered data from the login-form
+        var userName = document.getElementById('userName');
+        var userPassword = document.getElementById('userPassword');
+        console.log(userName.value,storedName);
+        console.log(userPassword.value,storedPassword);
+        // check if stored data from register-form is equal to data from login form
+        if(userName.value !== storedName || userPassword.value !== storedPassword) {
+            document.getElementById("error_message").innerHTML="Invalid credentials. Please try again ";
+            //alert('ERROR');
+        }else {
+            self.location="welcome.html";
+            //window.navigate("directions.html");
+        }
+    }
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '583239255342174',
+            xfbml: true,
+            version: 'v2.7'
+        });
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                document.getElementById('status').innerHTML = 'We are connected to FaceBook';
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'We are not connected to FaceBook';
+            } else{
+                document.getElementById('status').innerHTML = 'We are not logged into FaceBook';
+            }
+        });
+    };
+    (function(thisdocument, scriptelement, id) {
+        var js, fjs = thisdocument.getElementsByTagName(scriptelement)[0];
+        if (thisdocument.getElementById(id)) return;
+        js = thisdocument.createElement(scriptelement); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js"; //you can use
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    function  login() {
+        FB.login(function (response) {
+            if (response.status === 'connected') {
+                self.location="welcome.html";
+                document.getElementById('status').innerHTML = 'We are connected to FaceBook';
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'We are not connected to FaceBook';
+            } else{
+                document.getElementById('status').innerHTML = 'We are not logged into FaceBook';
+            }
+        });
+    }
+</script>
